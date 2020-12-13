@@ -1,0 +1,25 @@
+{
+  "name": "Smartial-Website",
+  "version": "1.0.0",
+  "description": "To insert into the monorepository at a later time",
+  "main": "index.js",
+  "scripts": {
+    "dev" : "next dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThallyssonKlein/Smartial-Website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ThallyssonKlein/Smartial-Website/issues"
+  },
+  "homepage": "https://github.com/ThallyssonKlein/Smartial-Website#readme",
+  "dependencies": {
+    "next": "^10.0.3",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
