@@ -4,7 +4,7 @@
   "description": "To insert into the monorepository at a later time",
   "main": "index.js",
   "scripts": {
-    "dev" : "next dev"
+    "dev": "next dev"
   },
   "repository": {
     "type": "git",
