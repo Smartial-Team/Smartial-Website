@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { usePubNub } from 'pubnub-react';
-// import QRCode from "react-qr-code";
 import QRCode from 'qrcode.react';
 import ProgressBar from '../components/ProgressBar';
 import publicIp from "public-ip";
@@ -11,6 +10,7 @@ import {
     FirestoreMutation,
 } from "@react-firebase/firestore";
 import MutationHandler from '../components/MutationHandler';
+import { IpContext } from '../context/IpContext';
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_API_KEY,
@@ -18,20 +18,17 @@ const firebaseConfig = {
     projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
     storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
     messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
-    appId: process.env.NEXT_PUBLIC_APP_ID,
-    databaseURL : process.env.NEXT_PUBLIC_DATABASE_URL
+    appId: process.env.NEXT_PUBLIC_APP_ID
 };
-console.log(firebaseConfig);
 
 // if(!firebase.apps.length){
 //     firebase.initializeApp();
 // }
   
 export default function Login(){
-    const [userIp, setUserIp] = useState("");
     const [QR, setQR] = useState(null);
     const pubnub = usePubNub();
-
+    const { userIp, setUserIp } = useContext(IpContext);
 
     function handleMessage(){
 
@@ -53,7 +50,7 @@ export default function Login(){
     }else{
         return <div className="viewport">
                     <FirestoreProvider {...firebaseConfig} firebase={firebase}>
-                        <FirestoreMutation path="pubnub_open_channels" type="push">
+                        <FirestoreMutation path="pubnub_open_channels" type="add">
                             {({ runMutation }) => (
                                 <>
                                     <MutationHandler pubNubChannel={userIp}

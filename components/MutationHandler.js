@@ -1,16 +1,17 @@
-import { render } from "react-nil";
+import { useContext } from 'react';
+import { IpContext } from '../context/IpContext';
 
-function Firestore({runMutation, pubNubChannel, QR, setQR}){
+export default function Firestore({runMutation, QR, setQR}){
+    const { userIp } = useContext(IpContext);
 
     async function asyncRunMutation(){
-        const { key } = await runMutation({ pubNubChannel });
+        const { key } = await runMutation({ userIp });
         setQR(key);
     }
 
-    if(pubNubChannel && !QR){
+    if(userIp && !QR){
         asyncRunMutation();
     }
-    return null;
-}
 
-export default render(<Firestore/>);
+    return <div/>;
+}
