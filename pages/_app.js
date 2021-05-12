@@ -5,8 +5,7 @@ import IpContext from '../context/IpContext';
 
 const pubNubConfig = new PubNub({
     publishKey: process.env.NEXT_PUBLIC_PUBLISH_KEY,
-    subscribeKey: process.env.NEXT_PUBLIC_SUBSCRIBE_KEY,
-    secretKey: process.env.NEXT_PUBLIC_SECRET_KEY
+    subscribeKey: process.env.NEXT_PUBLIC_SUBSCRIBE_KEY
 });
 
 export default function Home({ Component, pageProps }) {

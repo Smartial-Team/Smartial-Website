@@ -11,15 +11,7 @@ import {
 } from "@react-firebase/firestore";
 import MutationHandler from '../components/MutationHandler';
 import { IpContext } from '../context/IpContext';
-
-const firebaseConfig = {
-    apiKey: process.env.NEXT_PUBLIC_API_KEY,
-    authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
-    projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-    storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
-    messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
-    appId: process.env.NEXT_PUBLIC_APP_ID
-};
+import firebaseConfig from '../common/FirebaseConfig';
 
 // if(!firebase.apps.length){
 //     firebase.initializeApp();
@@ -30,8 +22,8 @@ export default function Login(){
     const pubnub = usePubNub();
     const { userIp, setUserIp } = useContext(IpContext);
 
-    function handleMessage(){
-
+    function handleMessage(event){
+        alert(event.message);
     }
 
     useEffect(async _ => {
