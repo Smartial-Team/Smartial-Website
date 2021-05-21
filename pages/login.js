@@ -12,6 +12,7 @@ import {
 import MutationHandler from '../components/MutationHandler';
 import { IpContext } from '../context/IpContext';
 import firebaseConfig from '../common/FirebaseConfig';
+import { useRouter } from 'next/router';
 
 // if(!firebase.apps.length){
 //     firebase.initializeApp();
@@ -21,9 +22,10 @@ export default function Login(){
     const [QR, setQR] = useState(null);
     const pubnub = usePubNub();
     const { userIp, setUserIp } = useContext(IpContext);
+    const router = useRouter();
 
     function handleMessage(event){
-        alert(event.message);
+        router.push('/app', {google_user_id : event.message});
     }
 
     useEffect(async _ => {
