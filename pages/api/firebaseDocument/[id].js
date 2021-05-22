@@ -1,7 +1,6 @@
 import firebaseConfig from '../../../common/FirebaseConfig';
 import firebase from "firebase/app";
 import "firebase/firestore";
-console.log(firebaseConfig);
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }

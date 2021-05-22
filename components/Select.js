@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { FormContext } from '../context/FormContext';
 
-export function Select({item}){
+export default function Select({item}){
     const { formValues, setFormValues } = useContext(FormContext);
 
     function onChange(e){

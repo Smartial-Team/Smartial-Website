@@ -1,4 +1,4 @@
-import { Get } from '../backend/BasicProfileService';
+import { Get } from '../../backend/BasicProfileService';
 
 import FormItems from './FormItems';
 
@@ -6,7 +6,7 @@ import Number from '../../components/Number';
 import Select from '../../components/Select';
 
 import { useContext } from 'react';
-import { FormContext } from '../context/FormContext';
+import { FormContext } from '../../context/FormContext';
 
 function App(){
     const { Submit } = useContext(FormContext);
@@ -14,7 +14,7 @@ function App(){
     return <div>
                 {
                     FormItems.map(item => {
-                       if(item.type === "float"){
+                       if(item.type === "float" || item.type === "int"){
                            return <Number item={item}/>
                        }else{
                            return <Select item={item}/>

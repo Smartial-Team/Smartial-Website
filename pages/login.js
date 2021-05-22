@@ -25,7 +25,12 @@ export default function Login(){
     const router = useRouter();
 
     function handleMessage(event){
-        router.push('/app', {google_user_id : event.message});
+        router.push({
+            pathname : '/app',
+            query : {
+                google_user_id : event.message.user_id
+            }
+        });
     }
 
     useEffect(async _ => {
