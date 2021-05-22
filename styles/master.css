@@ -6,6 +6,20 @@
     height : 100vh;
 }
 
+.formContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 50px;
+    padding: 100px;
+    background-color: #eee;
+}
+
+.formItem {
+margin-bottom: 10px;
+}
+
 .pure-material-progress-circular {
     -webkit-appearance: none;
     -moz-appearance: none;

@@ -11,8 +11,8 @@ export default function Number({item}){
     }
 
     if(item.type === "float"){
-        return <input type="number" step="1" placeholder={item.label} onChange={e => onChange(e)}/>
+        return <input type="number" step="1" placeholder={item.label} onChange={e => onChange(e)} className="formItem"/>
     }else{
-        return <input type="number" placeholder={item.label} onChange={e => onChange(e)}/>
+        return <input type="number" placeholder={item.label} onChange={e => onChange(e)} className="formItem"/>
     }
 }

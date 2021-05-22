@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { FormContext } from '../context/FormContext';
 
-export default function Select({item}){
+export default function TextInput({item}){
     const { formValues, setFormValues } = useContext(FormContext);
 
     function onChange(e){
@@ -10,11 +10,5 @@ export default function Select({item}){
         setFormValues(obj);
     }
 
-    return <select onChange={onChange} className="formItem">
-                {
-                    item.choices.map(choice => {
-                        return <option>{choice}</option>
-                    })
-                }
-            </select> 
+    return <input type="text" placeholder={item.label} onChange={e => onChange(e)} className="formItem"/>
 }

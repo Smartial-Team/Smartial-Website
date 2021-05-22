@@ -1,6 +1,7 @@
 const FormItems = [
     //Personal
     // [{fieldName: "birthDate"},{label: "Data de Nascimento", type: "date"}],
+    {fieldName : "name", label : "Nome", type: "text"},
     {fieldName: "height", label: "Altura", type: "float"},
     {fieldName: "weight", label: "Peso", type: "int"},
     {fieldName: "wingspan", label: "Envergadura", type: "float"},

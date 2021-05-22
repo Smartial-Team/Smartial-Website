@@ -4,6 +4,7 @@ import FormItems from './FormItems';
 
 import Number from '../../components/Number';
 import Select from '../../components/Select';
+import TextInput from '../../components/TextInput';
 
 import { useContext } from 'react';
 import { FormContext } from '../../context/FormContext';
@@ -11,17 +12,21 @@ import { FormContext } from '../../context/FormContext';
 function App(){
     const { Submit } = useContext(FormContext);
 
-    return <div>
-                {
-                    FormItems.map(item => {
-                       if(item.type === "float" || item.type === "int"){
-                           return <Number item={item}/>
-                       }else{
-                           return <Select item={item}/>
-                       }
-                    })
-                }
-                <button onClick={_ => Submit()}>ENVIAR</button>
+    return <div className="viewport">
+                <div className="formContainer">
+                    {
+                        FormItems.map(item => {
+                        if(item.type === "float" || item.type === "int"){
+                            return <Number item={item}/>
+                        }else if(item.type === "text"){
+                            return <TextInput item={item}/>
+                        }else{
+                            return <Select item={item}/>
+                        }
+                        })
+                    }
+                    <button onClick={_ => Submit()}>ENVIAR</button>
+                </div>
             </div>
 }
 
