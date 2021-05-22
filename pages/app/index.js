@@ -9,8 +9,11 @@ import TextInput from '../../components/TextInput';
 import { useContext } from 'react';
 import { FormContext } from '../../context/FormContext';
 
+import { useRouter } from 'next/router'
+
 function App(){
     const { Submit } = useContext(FormContext);
+    const router = useRouter();
 
     return <div className="viewport">
                 <div className="formContainer">
@@ -25,7 +28,7 @@ function App(){
                         }
                         })
                     }
-                    <button onClick={_ => Submit()}>ENVIAR</button>
+                    <button onClick={_ => Submit(router.query.google_user_id)}>ENVIAR</button>
                 </div>
             </div>
 }
