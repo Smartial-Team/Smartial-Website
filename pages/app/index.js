@@ -33,7 +33,7 @@ function App(){
             </div>
 }
 
-App.getInitialProps = async ctx => {
+App.getServerSideProps = async ctx => {
     const authenticated = await Get(ctx.query.google_user_id);
 
     if(!authenticated){
