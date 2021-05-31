@@ -6,6 +6,7 @@ import formInputs from './formInputs';
 import Input from './Input';
 import Label from './Label';
 import SubmitButton from './SubmitButton';
+import Popup from '../../shared/Popup';
 
 export default function Form() {
 	// user input data
@@ -26,6 +27,10 @@ export default function Form() {
 	const [states, setStates] = useState([]);
 	const [cities, setCities] = useState([]);
 
+	// submit form error handling
+	const [error, setError] = useState(false);
+	const [success, setSuccess] = useState(false);
+
 	const mapInputToState = {
 		name: { value: name, setValue: setName },
 		age: { value: age, setValue: setAge },
@@ -41,6 +46,10 @@ export default function Form() {
 		style: { value: style, setValue: setStyle },
 	};
 
+	function sortUFs(array) {
+		return array.sort((a, b) => (a.sigla > b.sigla ? 1 : -1));
+	}
+
 	useEffect(async () => {
 		const UFsUrl = `https://servicodados.ibge.gov.br/api/v1/localidades/estados`;
 		const getUFs = await (await fetch(UFsUrl)).json();
@@ -54,13 +63,25 @@ export default function Form() {
 		setCities(getCities);
 	}, [state]);
 
-	function sortUFs(array) {
-		return array.sort((a, b) => (a.sigla > b.sigla ? 1 : -1));
-	}
-
 	async function handleFormSubmit(e) {
 		e.preventDefault();
 
+		const body = JSON.stringify(
+			name,
+			age,
+			state,
+			city,
+			height,
+			weight,
+			wingspan,
+			category,
+			victories,
+			knockouts,
+			defeats,
+			style
+		);
+
+		// router.query.google_user_id
 		const post = await Post('ID_DO_USUARIO', {
 			name,
 			age,
@@ -76,18 +97,23 @@ export default function Form() {
 			style,
 		});
 
-		alert(post);
+		if (!post) {
+			setError(true);
+			return;
+		}
+
+		setSuccess(true);
 	}
 
 	return (
 		<>
 			<form onSubmit={handleFormSubmit}>
-				<fieldset>
-					<legend>Complete seu cadastro</legend>
+				<legend>Complete seu cadastro</legend>
+				<div className="grid">
 					{formInputs.map(({ label, type, id, name, choices }) => {
 						if (id === 'state') {
 							return (
-								<div className={`input-field ${id}`} key={id}>
+								<div className={`input-field `} key={id}>
 									<Label text={label} htmlFor={id} />
 									<Select
 										name={name}
@@ -112,10 +138,9 @@ export default function Form() {
 								</div>
 							);
 						}
-
 						if (id === 'city') {
 							return (
-								<div className={`input-field ${id}`} key={id}>
+								<div className={`input-field `} key={id}>
 									<Label text={label} htmlFor={id} />
 									<Select
 										name={name}
@@ -139,10 +164,9 @@ export default function Form() {
 								</div>
 							);
 						}
-
 						if (id === 'category') {
 							return (
-								<div className={`input-field ${id}`} key={id}>
+								<div className={`input-field `} key={id}>
 									<Label text={label} htmlFor={id} />
 									<Select
 										name={name}
@@ -166,10 +190,9 @@ export default function Form() {
 								</div>
 							);
 						}
-
 						if (id === 'style') {
 							return (
-								<div className={`input-field ${type}`} key={id}>
+								<div className={`input-field `} key={id}>
 									<Label text={label} htmlFor={id} />
 									<Select
 										name={name}
@@ -178,7 +201,7 @@ export default function Form() {
 										setValue={setStyle}
 									>
 										<Option
-											text="Selecione um estilo de luta"
+											text="Selecione um estilo"
 											value=""
 											hidden
 										/>
@@ -193,9 +216,8 @@ export default function Form() {
 								</div>
 							);
 						}
-
 						return (
-							<div className={`input-field ${name}`} key={id}>
+							<div className={`input-field `} key={id}>
 								<Label text={label} htmlFor={id} />
 								<Input
 									type={type}
@@ -208,12 +230,44 @@ export default function Form() {
 							</div>
 						);
 					})}
-					<div className="submit-button">
-						<SubmitButton />
-					</div>
-				</fieldset>
+				</div>
+				<div className="submit-button">
+					<SubmitButton />
+				</div>
+				{error && <Popup type="error" setValue={setError} />}
+				{success && <Popup type="success" setValue={setSuccess} />}
 			</form>
-			<style jsx>{``}</style>
+			<style jsx>{`
+				form {
+					width: min(100%, 50rem);
+					margin: 0 auto;
+				}
+				.grid {
+					display: grid;
+					grid-template: min-content / repeat(
+							auto-fit,
+							minmax(19rem, 1fr)
+						);
+					grid-auto-rows: min-content;
+					gap: 1rem;
+					justify-content: center;
+					align-items: center;
+					row-gap: 1rem;
+					margin: 1rem 0;
+				}
+				legend {
+					grid-column: 1 / 2;
+					font-size: clamp(2rem, 3vw, 3rem);
+					font-weight: bolder;
+				}
+				.input-field {
+					width: 100%;
+				}
+				.submit-button {
+					display: flex;
+					justify-content: center;
+				}
+			`}</style>
 		</>
 	);
 }
