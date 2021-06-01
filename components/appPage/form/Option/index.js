@@ -4,7 +4,8 @@ export default function Option({ text, value, hidden }) {
 			<option value={value} hidden={hidden}>
 				{text}
 			</option>
-			<style jsx>{``}</style>
+			<style jsx>{`
+			`}</style>
 		</>
 	);
 }

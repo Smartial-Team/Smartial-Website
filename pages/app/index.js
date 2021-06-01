@@ -1,17 +1,23 @@
 import { Get } from '../../backend/BasicProfileService';
-
-import { useRouter } from 'next/router';
 import Form from '../../components/appPage/form';
 
-// router.query.google_user_id
-
 export default function App() {
-	const router = useRouter();
-
-	return <Form />;
+	return (
+		<>
+			<div className="container">
+				<Form />
+			</div>
+			<style jsx>{`
+				.container {
+					width: 100%;
+					padding: 2rem;
+				}
+			`}</style>
+		</>
+	);
 }
 
-// export async getServerSideProps(ctx) {
+// export async function getServerSideProps(ctx) {
 // 	const authenticated = await Get(ctx.query.google_user_id);
 
 // 	if (!authenticated) {
@@ -19,4 +25,4 @@ export default function App() {
 // 		return {};
 // 	}
 // 	return {};
-// };
+// }

@@ -21,6 +21,13 @@ export default function Input({
 			<style jsx>{`
 				input {
 					width: 100%;
+					background-color: var(--input-background-color);
+					border: 0.2rem solid var(--input-border-color);
+					border-radius: var(--border-radius);
+					padding: 1rem;
+				}
+				input:focus {
+					box-shadow: var(--input-focus-color);
 				}
 			`}</style>
 		</>

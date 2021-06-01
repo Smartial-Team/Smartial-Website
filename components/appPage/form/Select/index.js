@@ -9,7 +9,18 @@ export default function Select({ setValue, name, id, required, children }) {
 			>
 				{children}
 			</select>
-			<style jsx>{``}</style>
+			<style jsx>{`
+				select {
+					width: 100%;
+					padding: 1rem;
+					background-color: var(--input-background-color);
+					border: 0.2rem solid var(--input-border-color);
+					border-radius: var(--border-radius);
+				}
+				select:focus {
+					box-shadow: var(--input-focus-color);
+				}
+			`}</style>
 		</>
 	);
 }
