@@ -3,7 +3,7 @@ import PubNub from 'pubnub';
 import { PubNubProvider } from 'pubnub-react';
 import IpContextProvider from '../context/IpContext';
 import FormContextProvider from '../context/FormContext';
-import GlobalStyles from '../components/GlobalStyles';
+import GlobalStyles from '../components/globalStyles';
 
 const pubNubConfig = new PubNub({
 	publishKey: process.env.NEXT_PUBLIC_PUBLISH_KEY,
