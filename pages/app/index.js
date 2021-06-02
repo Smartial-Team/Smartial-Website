@@ -17,12 +17,12 @@ export default function App() {
 	);
 }
 
-// export async function getServerSideProps(ctx) {
-// 	const authenticated = await Get(ctx.query.google_user_id);
+export async function getServerSideProps(ctx) {
+	const authenticated = await Get(ctx.query.google_user_id);
 
-// 	if (!authenticated) {
-// 		ctx.res.writeHead(302, { Location: '/login' }).end();
-// 		return {};
-// 	}
-// 	return {};
-// }
+	if (!authenticated) {
+		ctx.res.writeHead(302, { Location: '/login' }).end();
+		return { props: {} };
+	}
+	return { props: {} };
+}

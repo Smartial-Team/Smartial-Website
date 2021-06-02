@@ -29,8 +29,18 @@ export default function Login() {
 	}, []);
 
 	return (
-		<div className="viewport">
-			{userIp && <QRCode value={userIp} renderAs="svg" />}
-		</div>
+		<>
+			<div className="viewport">
+				{userIp && <QRCode value={userIp} renderAs="svg" />}
+			</div>
+			<style jsx>{`
+				.viewport {
+					height: 100%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
+			`}</style>
+		</>
 	);
 }
