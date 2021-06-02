@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Post from '../../../backend/AthleteProfileService';
 import Select from './Select';
 import Option from './Option';
@@ -30,6 +31,8 @@ export default function Form() {
 	// submit form error handling
 	const [error, setError] = useState(false);
 	const [success, setSuccess] = useState(false);
+
+	const router = useRouter();
 
 	const mapInputToState = {
 		name: { value: name, setValue: setName },
@@ -66,23 +69,7 @@ export default function Form() {
 	async function handleFormSubmit(e) {
 		e.preventDefault();
 
-		const body = JSON.stringify(
-			name,
-			age,
-			state,
-			city,
-			height,
-			weight,
-			wingspan,
-			category,
-			victories,
-			knockouts,
-			defeats,
-			style
-		);
-
-		// router.query.google_user_id
-		const post = await Post('ID_DO_USUARIO', {
+		const post = await Post(router.query.google_user_id, {
 			name,
 			age,
 			state,
