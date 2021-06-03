@@ -23,7 +23,7 @@ export default function GlobalStyles({ children }) {
 
 					--border-radius: 0.6rem;
 
-					--button-background-color: #14171E;
+					--button-background-color: #14171e;
 				}
 				h1,
 				h2,
@@ -42,7 +42,12 @@ export default function GlobalStyles({ children }) {
 					color: var(--text-color);
 				}
 				body {
+					width: 100vw;
+					height: 100vh;
 					background-color: var(--body-background-color);
+				}
+				#__next {
+					height: 100%;
 				}
 			`}</style>
 		</>

@@ -1,8 +1,5 @@
-import '../styles/master.css';
 import PubNub from 'pubnub';
 import { PubNubProvider } from 'pubnub-react';
-import IpContextProvider from '../context/IpContext';
-import FormContextProvider from '../context/FormContext';
 import GlobalStyles from '../components/globalStyles';
 
 const pubNubConfig = new PubNub({
@@ -12,14 +9,10 @@ const pubNubConfig = new PubNub({
 
 export default function Home({ Component, pageProps }) {
 	return (
-		<IpContextProvider>
-			<FormContextProvider>
-				<PubNubProvider client={pubNubConfig}>
-					<GlobalStyles>
-						<Component {...pageProps} />
-					</GlobalStyles>
-				</PubNubProvider>
-			</FormContextProvider>
-		</IpContextProvider>
+		<PubNubProvider client={pubNubConfig}>
+			<GlobalStyles>
+				<Component {...pageProps} />
+			</GlobalStyles>
+		</PubNubProvider>
 	);
 }
