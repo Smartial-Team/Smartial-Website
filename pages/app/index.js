@@ -21,8 +21,9 @@ export async function getServerSideProps(ctx) {
 	const authenticated = await Get(ctx.query.google_user_id);
 
 	if (!authenticated) {
-		ctx.res.writeHead(302, { Location: '/login' }).end();
-		return { props: {} };
+		return {
+			redirect: { destination: '/login', permanent: true },
+		};
 	}
 	return { props: {} };
 }
