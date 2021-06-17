@@ -26,17 +26,17 @@ export default function Login() {
 	}
 
 	useEffect(async () => {
-		const ip = await publicIp.v6({
-			fallbackUrls: ['http://api6.ipify.org/?format=json'],
-		});
+		try {
+			const ip = await publicIp.v6({
+				fallbackUrls: ['http://api6.ipify.org/?format=json'],
+			});
 
-		if (!ip) {
+			pubNubChannel(ip);
+		} catch (error) {
 			const userUuid = pubnub.getUUID();
 
 			pubNubChannel(userUuid);
 		}
-
-		pubNubChannel(ip);
 	}, []);
 
 	return (
