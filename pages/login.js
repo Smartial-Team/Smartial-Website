@@ -5,7 +5,7 @@ import publicIp from 'public-ip';
 import { useRouter } from 'next/router';
 
 export default function Login() {
-	const [userIp, setUserIp] = useState(null);
+	const [qrCodeData, setQrCodeData] = useState(null);
 
 	const pubnub = usePubNub();
 	const router = useRouter();
@@ -19,19 +19,30 @@ export default function Login() {
 		});
 	}
 
+	function pubNubChannel(channelName) {
+		pubnub.addListener({ message: handleMessage });
+		pubnub.subscribe({ channels: [new String(channelName)] });
+		setQrCodeData(channelName);
+	}
+
 	useEffect(async () => {
 		const ip = await publicIp.v6({
-			fallbackUrls: ['https://ifconfig.co/ip'],
+			fallbackUrls: ['http://api6.ipify.org/?format=json'],
 		});
-		pubnub.addListener({ message: handleMessage });
-		pubnub.subscribe({ channels: [new String(ip)] });
-		setUserIp(ip);
+
+		if (!ip) {
+			const userUuid = pubnub.getUUID();
+
+			pubNubChannel(userUuid);
+		}
+
+		pubNubChannel(ip);
 	}, []);
 
 	return (
 		<>
 			<div className="viewport">
-				{userIp && <QRCode value={userIp} renderAs="svg" />}
+				{qrCodeData && <QRCode value={qrCodeData} renderAs="svg" />}
 			</div>
 			<style jsx>{`
 				.viewport {
