@@ -1,4 +1,8 @@
-export default function SubmitButton({ css }) {
+type Props = {
+	css?: {} 
+}
+
+export default function SubmitButton({ css }: Props) {
 	return (
 		<>
 			<button type="submit">Enviar</button>
@@ -14,6 +18,9 @@ export default function SubmitButton({ css }) {
 				}
 				button:focus {
 					box-shadow: var(--input-focus-color);
+				}
+				button:hover {
+					cursor: pointer;
 				}
 			`}</style>
 		</>
