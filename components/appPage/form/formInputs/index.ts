@@ -1,4 +1,4 @@
-const FormItems = [
+const formInputs = [
 	//Personal
 	// [{fieldName: "birthDate"},{label: "Data de Nascimento", type: "date"}],
 	{
@@ -81,4 +81,4 @@ const FormItems = [
 	},
 ];
 
-export default FormItems;
+export default formInputs;
