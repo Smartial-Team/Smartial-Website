@@ -17,14 +17,14 @@ export default function App() {
   );
 }
 
-// export async function getServerSideProps(ctx) {
-//   const authenticated = await getTrainer(ctx.query.google_user_id);
+export async function getServerSideProps(ctx) {
+   const authenticated = await getTrainer(ctx.query.google_user_id);
 
-//   if (!authenticated.ok) {
-//     return {
-//       redirect: { destination: "/login", permanent: false },
-//     };
-//   }
+   if (!authenticated.ok) {
+     return {
+       redirect: { destination: "/login", permanent: false },
+     };
+   }
 
-//   return { props: {} };
-// }
+   return { props: {} };
+}
